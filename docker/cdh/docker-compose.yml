@@ -75,6 +75,12 @@ services:
       - ALL
     command: "/usr/bin/monit -I"
 
+networks:
+  default:
+    external:
+      name: hdp_net
+
+
 volumes:
   jdk:
     external:

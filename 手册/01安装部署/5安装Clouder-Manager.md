@@ -1,17 +1,26 @@
-## 5. 建立CM服务器
-### 5.1 安装CM-SERVER
-#### 5.1.1 配置repo库
-下载配置库文件
+# 5.安装Clouder Manager服务器
+在准备好CDH的环境和CDH的本地离线库后，整个Clouder Manager的安装将会非常的容易。
+1. 配置yum指向ehdp-cm库的url
+2. 安装clouder-manager-daemons和clouder-server
+3. 安装postgres数据库，配置用户
+4. 修正cm-server的数据库连接配置
+5. 启动服务器
+
+
+## 5.1 配置YUM源
+### 5.1.1下载配置库文件
 
 	cd /etc/yum.repos.d/
 	wget -Nv http://ehdp-cm/cm5/cloudera-cm.repo
 
-编辑cloudera-cm.repo 修改内容为
+### 5.1.2 修改cloudera-cm.repo
+修改对应的baseurl和gpkkey的内容
 
 	baseurl=http://ehdp-cm/cm5/5/
-	gpgkey = http://ehdp-cm/cm5/RPM-GPG-KEY-cloudera
+	gpgkey=http://ehdp-cm/cm5/RPM-GPG-KEY-cloudera
 
-#### 5.1.2 下载并安装CM-server
+## 5.2 安装CM服务器
+### 5.1.2 下载并安装CM-server
 
 	wget -Nv http://ehdp-cm/install/cloudera-manager-installer.bin
 	chmod 775 cloudera-manager-installer.bin
