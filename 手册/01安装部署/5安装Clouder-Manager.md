@@ -2,7 +2,7 @@
 在准备好CDH的环境和CDH的本地离线库后，整个Clouder Manager的安装将会非常的容易。
 1. 配置yum指向ehdp-cm库的url
 2. 安装clouder-manager-daemons和clouder-server
-3. 安装postgres数据库，配置用户
+3. 安装和配置postgres数据库
 4. 修正cm-server的数据库连接配置
 5. 启动服务器
 
@@ -19,23 +19,36 @@
 	baseurl=http://ehdp-cm/cm5/5/
 	gpgkey=http://ehdp-cm/cm5/RPM-GPG-KEY-cloudera
 
+修改完毕后执行`yum repolist`,能够正确显示就代表正常了。
+
 ## 5.2 安装CM服务器
-### 5.1.2 下载并安装CM-server
+### 5.1.1 自定义数据库的安装方法
+
+	yum install cloudera-manager-daemons cloudera-manager-server
+
+### 5.1.2 一键完成的安装方法（不建议选择）
+该方法由于安装了内嵌数据库，不建议在生产环境使用，安装完成后有提示的。
 
 	wget -Nv http://ehdp-cm/install/cloudera-manager-installer.bin
 	chmod 775 cloudera-manager-installer.bin
 	./cloudera-manager-installer.bin --skip_repo_package=1 #跳过远程库下载
 
+安装完毕后，会提示一个URL，通过浏览器地址即可访问，用户密码都是admin
 
-至此，按提示页面进行对应选择即可成功在内网服务器上安装ClouderaManager，安装好后，会提示一个URL，通过浏览器地址即可访问，用户密码都是admin
+## 5.3 安装和配置POSTGRES
 
-### 5.2 配置POSTGRES
-#### 5.2.1 初始化数据库
+### 5.3.1安装postgresql数据库
+	yum install postgresql-server
+
+### 5.3.2 初始化数据库
+如果目录`/var/lib/pgsql/data`中存在数据库的文件，如base文件夹等，则证明数据库已经初始化了，
+不用执行下面的指令
+
 	su - postgres
 	postgresql-setup initdb
 
-#### 5.2.2 修改数据库配置文件
-在目录中/var/lib/pgsql/data修改postgresql.conf(删除注释)
+### 5.3.3 修改数据库配置文件作为外部数据库使用
+在目录中`/var/lib/pgsql/data`修改`postgresql.conf`文件(删除注释)
 
 	listen_addresses = '*'		# what IP address(es) to listen on;
 								# comma-separated list of addresses;
@@ -44,7 +57,7 @@
 	port = 5432					# (change requires restart)
 
 
-在目录中/var/lib/pgsql/data修改pg_hba.conf（修改trust为md5）
+在目录中`/var/lib/pgsql/data`修改pg_hba.conf（修改trust为md5）
 
 	# "local" is for Unix domain socket connections only
 	local   all             all                                     peer
@@ -53,18 +66,18 @@
 	# IPv6 local connections:
 	host    all             all             ::1/128                 md5
 
-#### 5.2.3 启动服务器
+### 5.3.4 启动数据库服务器
 
 	systemctl start postgresql.service
 	systemctl enabale postgresql.service
 
-#### 5.2.4 配置POSTGRES数据库的用户与密码
-使用用户登录postgres服务器
+### 5.3.5 配置POSTGRES数据库的用户与密码
+#### 5.3.5.1使用用户登录postgres服务器
 
 	su - postgres
 	psql
 
-第一步创建数据用户角色和数据库
+#### 5.3.5.2 创建数据用户角色和数据库
 
 	CREATE ROLE scm LOGIN PASSWORD 'efun';
 	CREATE DATABASE scm OWNER scm ENCODING 'UTF8';
@@ -94,38 +107,44 @@
 	CREATE DATABASE navms OWNER navms ENCODING 'UTF8';
 	GRANT ALL PRIVILEGES ON DATABASE navms to navms;
 
-第二步，分别使用各自的账号创建schema
+
+如果以上步骤不能成功执行，出现没有utf8编码，需要先执行如下步骤
+
+	UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+	DROP DATABASE template1;
+	CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+	UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+	\c template1
+	VACUUM FREEZE;
+	\q
+
+#### 5.3.5.2 配置账号的默认schema
 
 	psql -h ehdp-cm -U scm
+	输入密码：
 	create SCHEMA scm
 
 	psql -h ehdp-cm -U hive
+	输入密码：
 	create SCHEMA hive
+	………………
 
+#### 5.3.6 重新启动数据库服务
+	systemctl restart postgresql.service
 
-#### 5.2.5 配置POSTGRES的SCHEMA
+至此，数据库的安装完毕。
 
-### 5.3 停止服务器
-	/etc/init.d/cloudera-scm-server stop
-	/etc/init.d/cloudera-scm-server-db stop
+### 5.4 修正cm-server的数据库连接配置 （重要）
+执行脚本完成cloudera-scm-server的数据库安装与配置，执行完成后，
 
-### 5.4 安装SCM库
+请查看文件`/etc/cloudera-scm-server/db.properties`是否正确的值。
 
-	/usr/share/cmf/schema/scm_prepare_database.sh postgresql -h ehdp-cm scm scm efun
+	/usr/share/cmf/schema/scm_prepare_database.sh postgresql -h ehdp-cm -P 5432 scm scm efun
 
-### 5.5 卸载JDK7和CM-SERVER-DB
-	yum remove
-	yum remove
-
-### 5.6 启动服务器
+### 5.5 启动cm服务
 	/etc/init.d/cloudera-scm-server start
 
-### 5.7 测试启动成功
+### 5.6 测试启动成功
 
 	curl http://localhost:7180
 	<head><meta http-equiv="refresh" content="0;url=/cmf/"></head>
-
-## 6.安装集群
-以下内容均在浏览器中进行，优先下载ssh.tar,并自行解压以备后续使用。
-
-	http://ehdp-cm/install/ssh.tar
