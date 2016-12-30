@@ -1,17 +1,9 @@
 version: '2'
 services:
-  cdh-repo:
-    image: efun/nginx:1.0
-    hostname: ehdp-repo
-    container_name: ehdp-repo
-    dns: "114.114.114.114"
-    volumes:
-      - /opt/cdh/repo:/usr/share/nginx/html
-    command: "/usr/bin/monit -I"
-  cloudera-cm:
+  umgr-w1:
     image: efun/base:1.0
-    hostname: ehdp-cm
-    container_name: ehdp-cm
+    hostname: umgr-w1
+    container_name: umgr-w1
     ports:
       - "7180:7180"
     dns: "114.114.114.114"
@@ -22,63 +14,11 @@ services:
     cap_add:
       - ALL
     command: "/usr/bin/monit -I"
-  hadoop-m:
-    image: efun/base:1.0
-    hostname: ehdp-m
-    container_name: ehdp-m
-    dns: "114.114.114.114"
-    volumes:
-      - jdk:/usr/java/default
-      - /opt/hdp/data/dm:/data
-    env_file:
-      - container.env
-    cap_add:
-      - ALL
-    command: "/usr/bin/monit -I"
-  hadoop-1:
-    image: efun/base:1.0
-    hostname: ehdp-s1
-    container_name: ehdp-s1
-    dns: "114.114.114.114"
-    volumes:
-      - jdk:/usr/java/default
-      - /opt/hdp/data/d1:/data
-    env_file:
-      - container.env
-    cap_add:
-      - ALL
-    command: "/usr/bin/monit -I"
-  hadoop-2:
-    image: efun/base:1.0
-    hostname: ehdp-s2
-    container_name: ehdp-s2
-    dns: "114.114.114.114"
-    volumes:
-      - jdk:/usr/java/default
-      - /opt/hdp/data/d2:/data
-    env_file:
-      - container.env
-    cap_add:
-      - ALL
-    command: "/usr/bin/monit -I"
-  hadoop-3:
-    image: efun/base:1.0
-    hostname: ehdp-s3
-    container_name: ehdp-s3
-    dns: "114.114.114.114"
-    volumes:
-      - jdk:/usr/java/default
-      - /opt/hdp/data/d3:/data
-    env_file:
-      - container.env
-    cap_add:
-      - ALL
-    command: "/usr/bin/monit -I"
 
 networks:
   default:
     external:
-      name: hdp_net
+      name: hdp.net
 
 
 volumes:

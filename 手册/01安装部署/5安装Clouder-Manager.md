@@ -44,7 +44,6 @@
 如果目录`/var/lib/pgsql/data`中存在数据库的文件，如base文件夹等，则证明数据库已经初始化了，
 不用执行下面的指令
 
-	su - postgres
 	postgresql-setup initdb
 
 ### 5.3.3 修改数据库配置文件作为外部数据库使用
@@ -78,6 +77,17 @@
 	psql
 
 #### 5.3.5.2 创建数据用户角色和数据库
+执行一下步骤变更utf8编码
+
+	UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+	DROP DATABASE template1;
+	CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+	UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+	\c template1
+	VACUUM FREEZE;
+	\q
+
+再执行创建用户和数据库
 
 	CREATE ROLE scm LOGIN PASSWORD 'efun';
 	CREATE DATABASE scm OWNER scm ENCODING 'UTF8';
@@ -108,16 +118,6 @@
 	GRANT ALL PRIVILEGES ON DATABASE navms to navms;
 
 
-如果以上步骤不能成功执行，出现没有utf8编码，需要先执行如下步骤
-
-	UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-	DROP DATABASE template1;
-	CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-	UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-	\c template1
-	VACUUM FREEZE;
-	\q
-
 #### 5.3.5.2 配置账号的默认schema
 
 	psql -h ehdp-cm -U scm
@@ -137,9 +137,9 @@
 ### 5.4 修正cm-server的数据库连接配置 （重要）
 执行脚本完成cloudera-scm-server的数据库安装与配置，执行完成后，
 
-请查看文件`/etc/cloudera-scm-server/db.properties`是否正确的值。
-
 	/usr/share/cmf/schema/scm_prepare_database.sh postgresql -h ehdp-cm -P 5432 scm scm efun
+
+请查看文件`/etc/cloudera-scm-server/db.properties`是否正确的值。
 
 ### 5.5 启动cm服务
 	/etc/init.d/cloudera-scm-server start
