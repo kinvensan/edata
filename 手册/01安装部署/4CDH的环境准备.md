@@ -9,7 +9,7 @@
 ### 4.2 安装与配置软件ntp软件
 
 	yum -y install ntp wget
-	yum install psmisc
+	yum -y install psmisc
 
 #### 4.2.1 主NTP服务器配置（ehdp-cm）
 修改/etc/ntp.conf文件
@@ -76,7 +76,7 @@
 
 ### 4.4 生成和配置SSH私钥
 #### 4.4.1 生成SSH私钥（在ehdp-cm）
-	ssh-keygen -t RSA  #一路回车
+	ssh-keygen   #一路回车
 	cd ~/.ssh
 	cat id_rsa.pub >> authorized_keys
 

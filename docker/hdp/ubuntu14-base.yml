@@ -1,19 +1,18 @@
 version: '2'
 services:
-  centos-base:
-    image: centos
-    hostname: centos-base
-    container_name: centos-base
+  ubuntu-base:
+    image: ubuntu:14.04
+    hostname: ubuntu-base
+    container_name: ubuntu-base
     dns: "114.114.114.114"
-    privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/repo-centos/:/var/www/html/
+      - /opt/cdh/repo-ubuntu/:/var/www/html/
     env_file:
       - container.env
     cap_add:
       - ALL
-    command: "/usr/sbin/init"
+    command: "ping localhost"
 
 networks:
   default:

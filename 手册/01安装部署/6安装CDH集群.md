@@ -59,8 +59,8 @@
 ![install parcel](../img/6_011_install_parcel.png)
 ![host check](../img/6_012_install_check.png)
 
-## 6.8 安装CM监控服务
-上面的过程完毕后，就会出现一个服务窗口，选择`自定义服务`，选择`zookeeper`,点击`继续`，选择需要配置clouder-server的监控服务，大致按照下面的列表选择即可，点击`继续`,并等待`完成`。
+## 6.8 集群设置
+上面的过程完毕后，就会出现一个集群设置窗口，选择`自定义服务`，选择`zookeeper`,点击`继续`，选择需要配置clouder-server的监控服务，大致按照下面的列表选择即可，点击`继续`,并等待`完成`。
 
 | 配置项   | 值 | 说明 |
 | ------------ | ------------- | ------------- |
@@ -70,4 +70,6 @@
 | Service Monitor  | ehdp-cm | 服务监控节点 |
 
 
-![install service](../img/6_013_service.png)
+![config service](../img/6_013_service.png)
+![config amon](../img/6_014_amon.png)
+![config amon](../img/6_015_amon_config.png)

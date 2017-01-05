@@ -6,7 +6,6 @@
 4. 修正cm-server的数据库连接配置
 5. 启动服务器
 
-
 ## 5.1 配置YUM源
 ### 5.1.1下载配置库文件
 
@@ -38,6 +37,15 @@
 ## 5.3 安装和配置POSTGRES
 
 ### 5.3.1安装postgresql数据库
+	export LANGUAGE=en_US.UTF-8
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+
+	# 对于ubuntu还需要执行下面两句
+	locale-gen en_US.UTF-8
+	dpkg-reconfigure locales
+
+	# 执行安装postgres数据库
 	yum install postgresql-server
 
 ### 5.3.2 初始化数据库
@@ -77,7 +85,7 @@
 	psql
 
 #### 5.3.5.2 创建数据用户角色和数据库
-执行一下步骤变更utf8编码
+如果系统中没有utf8 编码，可以利用UNICODE代替，该步骤**可选**
 
 	UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
 	DROP DATABASE template1;
@@ -87,7 +95,7 @@
 	VACUUM FREEZE;
 	\q
 
-再执行创建用户和数据库
+执行创建用户和数据库任务（以下均是在psql中执行）
 
 	CREATE ROLE scm LOGIN PASSWORD 'efun';
 	CREATE DATABASE scm OWNER scm ENCODING 'UTF8';

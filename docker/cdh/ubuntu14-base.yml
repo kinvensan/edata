@@ -1,24 +1,23 @@
 version: '2'
 services:
-  umgr-w1:
-    image: efun/base:1.0
-    hostname: umgr-w1
-    container_name: umgr-w1
-    ports:
-      - "7180:7180"
+  ubuntu-base:
+    image: ubuntu:14.04
+    hostname: ubuntu-base
+    container_name: ubuntu-base
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
+      - /opt/cdh/repo-ubuntu/:/var/www/html/
     env_file:
       - container.env
     cap_add:
       - ALL
-    command: "/usr/bin/monit -I"
+    command: "ping localhost"
 
 networks:
   default:
     external:
-      name: hdp.net
+      name: hdp_net
 
 
 volumes:
