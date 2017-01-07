@@ -1,9 +1,9 @@
 version: '2'
 services:
-  centos-base:
-    image: centos
-    hostname: centos-base
-    container_name: centos-base
+  cdh-cm:
+    image: centos/base:1.0
+    hostname: cdh-cm
+    container_name: cdh-cm
     dns: "114.114.114.114"
     privileged: true
     volumes:
@@ -14,11 +14,67 @@ services:
     cap_add:
       - ALL
     command: "/usr/sbin/init"
+  cdh-m1:
+    image: centos/base:1.0
+    hostname: cdh-m1
+    container_name: cdh-m1
+    dns: "114.114.114.114"
+    privileged: true
+    volumes:
+      - jdk:/usr/java/default
+      - /opt/cdh/data/cm1/:/data/
+    env_file:
+      - container.env
+    cap_add:
+      - ALL
+    command: "/usr/sbin/init"
+  cdh-s1:
+    image: centos/base:1.0
+    hostname: cdh-s1
+    container_name: cdh-s1
+    dns: "114.114.114.114"
+    privileged: true
+    volumes:
+      - jdk:/usr/java/default
+      - /opt/cdh/data/cs1/:/data/
+    env_file:
+      - container.env
+    cap_add:
+      - ALL
+    command: "/usr/sbin/init"
+  cdh-s2:
+    image: centos/base:1.0
+    hostname: cdh-s2
+    container_name: cdh-s2
+    dns: "114.114.114.114"
+    privileged: true
+    volumes:
+      - jdk:/usr/java/default
+      - /opt/cdh/data/cs2/:/data/
+    env_file:
+      - container.env
+    cap_add:
+      - ALL
+    command: "/usr/sbin/init"
+  cdh-s3:
+    image: centos/base:1.0
+    hostname: cdh-s3
+    container_name: cdh-s3
+    dns: "114.114.114.114"
+    privileged: true
+    volumes:
+      - jdk:/usr/java/default
+      - /opt/cdh/data/cs3/:/data/
+    env_file:
+      - container.env
+    cap_add:
+      - ALL
+    command: "/usr/sbin/init"
 
 networks:
   default:
     external:
-      name: hdp_net
+      name: hdp.net
 
 
 volumes:

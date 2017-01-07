@@ -42,11 +42,10 @@ docker的环境由于涉及比较多的环节，所以采用docker-compose来进
 ### 在容器中安装软件
 针对docker中centos环境的不足，需要在环境中安装如下内容
 
-    yum install perl wget curl
-    yum install initscripts
-    yum install openssh-server
-    yum install ntp
-    yum install psmisc
+    yum -y install perl wget curl
+    yum -y install openssh-server
+    yum -y install ntp
+    yum -y install psmisc initscripts policycoreutils
 
 设置root用户的密码
 

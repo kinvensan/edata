@@ -9,7 +9,7 @@
 ### 4.2 安装与配置软件ntp软件
 
 	yum -y install ntp wget
-	yum -y install psmisc
+	yum -y install psmisc initscripts policycoreutils
 
 #### 4.2.1 主NTP服务器配置（ehdp-cm）
 修改/etc/ntp.conf文件

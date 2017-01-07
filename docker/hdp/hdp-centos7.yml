@@ -1,14 +1,14 @@
 version: '2'
 services:
-  cmgr-w1:
+  chdp-ambari:
     image: centos/base:1.0
-    hostname: cmgr-w1
-    container_name: cmgr-w1
+    hostname: chdp-ambari
+    container_name: chdp-ambari
     dns: "114.114.114.114"
     privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/repo-centos/:/var/www/html/
+      - /opt/hdp/repo-centos/:/var/www/html/
     env_file:
       - container.env
     cap_add:
@@ -22,7 +22,7 @@ services:
     privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/cm1/:/data/
+      - /opt/hdp/data/cm1/:/data/
     env_file:
       - container.env
     cap_add:
@@ -36,7 +36,7 @@ services:
     privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/cs1/:/data/
+      - /opt/hdp/data/cs1/:/data/
     env_file:
       - container.env
     cap_add:
@@ -50,7 +50,7 @@ services:
     privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/cs2/:/data/
+      - /opt/hdp/data/cs2/:/data/
     env_file:
       - container.env
     cap_add:
@@ -64,7 +64,7 @@ services:
     privileged: true
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/cs3/:/data/
+      - /opt/hdp/data/cs3/:/data/
     env_file:
       - container.env
     cap_add:
@@ -74,7 +74,7 @@ services:
 networks:
   default:
     external:
-      name: hdp_net
+      name: hdp.net
 
 
 volumes:

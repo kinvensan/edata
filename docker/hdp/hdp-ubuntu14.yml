@@ -1,13 +1,13 @@
 version: '2'
 services:
-  umgr-w1:
+  uhdp-ambari:
     image: ubuntu/base:1.0
-    hostname: umgr-w1
-    container_name: umgr-w1
+    hostname: uhdp-ambari
+    container_name: uhdp-ambari
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/repo-ubuntu/:/var/www/html/
+      - /opt/hdp/repo-ubuntu/:/var/www/html/
     env_file:
       - container.env
     cap_add:
@@ -15,12 +15,12 @@ services:
     command: "/usr/bin/monit -I"
   uhdp-m1:
     image: ubuntu/base:1.0
-    hostname: ehdp-m
-    container_name: ehdp-m
+    hostname: uhdp-m1
+    container_name: uhdp-m1
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/um1/:/data/
+      - /opt/hdp/data/um1/:/data/
     env_file:
       - container.env
     cap_add:
@@ -33,7 +33,7 @@ services:
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/us1/:/data/
+      - /opt/hdp/data/us1/:/data/
     env_file:
       - container.env
     cap_add:
@@ -46,7 +46,7 @@ services:
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/us2/:/data/
+      - /opt/hdp/data/us2/:/data/
     env_file:
       - container.env
     cap_add:
@@ -59,7 +59,7 @@ services:
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
-      - /opt/cdh/data/us3/:/data/
+      - /opt/hdp/data/us3/:/data/
     env_file:
       - container.env
     cap_add:
@@ -69,7 +69,7 @@ services:
 networks:
   default:
     external:
-      name: hdp_net
+      name: hdp.net
 
 
 volumes:

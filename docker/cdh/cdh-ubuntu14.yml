@@ -1,9 +1,9 @@
 version: '2'
 services:
-  umgr-w1:
+  ucdh-cm:
     image: ubuntu/base:1.0
-    hostname: umgr-w1
-    container_name: umgr-w1
+    hostname: ucdh-cm
+    container_name: ucdh-cm
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
@@ -13,10 +13,10 @@ services:
     cap_add:
       - ALL
     command: "/usr/bin/monit -I"
-  uhdp-m1:
+  ucdh-m1:
     image: ubuntu/base:1.0
-    hostname: ehdp-m
-    container_name: ehdp-m
+    hostname: cdh-m1
+    container_name: cdh-m1
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
@@ -26,10 +26,10 @@ services:
     cap_add:
       - ALL
     command: "/usr/bin/monit -I"
-  uhdp-s1:
+  ucdh-s1:
     image: ubuntu/base:1.0
-    hostname: uhdp-s1
-    container_name: uhdp-s1
+    hostname: ucdh-s1
+    container_name: ucdh-s1
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
@@ -39,10 +39,10 @@ services:
     cap_add:
       - ALL
     command: "/usr/bin/monit -I"
-  uhdp-s2:
+  ucdh-s2:
     image: ubuntu/base:1.0
-    hostname: uhdp-s2
-    container_name: uhdp-s2
+    hostname: ucdh-s2
+    container_name: ucdh-s2
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
@@ -52,10 +52,10 @@ services:
     cap_add:
       - ALL
     command: "/usr/bin/monit -I"
-  uhdp-s3:
+  ucdh-s3:
     image: ubuntu/base:1.0
-    hostname: uhdp-s3
-    container_name: uhdp-s3
+    hostname: ucdh-s3
+    container_name: ucdh-s3
     dns: "114.114.114.114"
     volumes:
       - jdk:/usr/java/default
@@ -69,7 +69,7 @@ services:
 networks:
   default:
     external:
-      name: hdp_net
+      name: hdp.net
 
 
 volumes:
