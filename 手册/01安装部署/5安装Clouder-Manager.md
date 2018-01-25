@@ -47,20 +47,45 @@ systemctl start mysqld.service
 systemctl enable mysqld.service
 ···
 
-### 5.3.2 初始化
+### 5.3.2 更改密码
 在/var/log/mysqld.log中找到
 
 ```
 A temporary password is generated for root@localhost
 ```
 
-### 5.3.3 建立数据库
-```
+
+
+### 5.3.３ 正确安装mysql.jar
 
 ```
-### 5.3.4 建立mysql连接库
-$ sudo mkdir -p /usr/share/java/
-$ sudo cp mysql-connector-java-5.1.31/mysql-connector-java-5.1.31-bin.jar /usr/share/java/mysql-connector-java.jar
+$ mkdir -p /usr/share/java/
+$ cp mysql-connector-java-5.1.31/mysql-connector-java-5.1.31-bin.jar /usr/share/java/mysql-connector-java.jar
+```
+** /usr/share/java/mysql-connector-java.jar 名字要变更正确**
+
+### 5.3.4 数据库初始化
+建立数据库
+```
+create database amon DEFAULT CHARACTER SET utf8;
+create database rman DEFAULT CHARACTER SET utf8;
+create database metastore DEFAULT CHARACTER SET utf8;
+create database sentry DEFAULT CHARACTER SET utf8;
+create database nav DEFAULT CHARACTER SET utf8;
+create database navms DEFAULT CHARACTER SET utf8;
+create database cmf DEFAULT CHARACTER SET utf8;
+grant all on cmf.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on amon.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on rman.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on metastore.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on sentry.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on nav.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+grant all on navms.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
+```
+初始化数据
+```
+/usr/share/cmf/schema/scm_prepare_database.sh mysql -h ehdp-manager cmf cmf cmf123
+```
 
 ## 5.3 安装和配置POSTGRES
 
