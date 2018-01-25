@@ -82,9 +82,14 @@ grant all on sentry.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
 grant all on nav.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
 grant all on navms.* TO 'cmf'@'%' IDENTIFIED BY 'cmf123';
 ```
-初始化数据
+初始化数据（新版本这步骤不正确）
 ```
 /usr/share/cmf/schema/scm_prepare_database.sh mysql -h ehdp-manager cmf cmf cmf123
+```
+自行修改 `/etc/cloudera-scm-server/db.properties`
+内容如下：
+
+```
 ```
 
 ## 5.3 安装和配置POSTGRES
