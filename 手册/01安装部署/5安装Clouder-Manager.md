@@ -56,8 +56,11 @@ A temporary password is generated for root@localhost
 
 ### 5.3.3 建立数据库
 ```
-```
 
+```
+### 5.3.4 建立mysql连接库
+$ sudo mkdir -p /usr/share/java/
+$ sudo cp mysql-connector-java-5.1.31/mysql-connector-java-5.1.31-bin.jar /usr/share/java/mysql-connector-java.jar
 
 ## 5.3 安装和配置POSTGRES
 
