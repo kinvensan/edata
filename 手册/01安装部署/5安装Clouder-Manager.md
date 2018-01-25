@@ -34,6 +34,31 @@
 
 安装完毕后，会提示一个URL，通过浏览器地址即可访问，用户密码都是admin
 
+## 5.3 安装和配置mysql
+### 5.3.1安装mysql数据库
+
+下载rpm文件
+参考 https://dev.mysql.com/downloads/repo/yum/
+
+···
+yum localinstall mysql57-community-release-el7-11.noarch.rpm
+yum install mysql-server
+systemctl start mysqld.service
+systemctl enable mysqld.service
+···
+
+### 5.3.2 初始化
+在/var/log/mysqld.log中找到
+
+```
+A temporary password is generated for root@localhost
+```
+
+### 5.3.3 建立数据库
+```
+```
+
+
 ## 5.3 安装和配置POSTGRES
 
 ### 5.3.1安装postgresql数据库
