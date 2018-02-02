@@ -96,6 +96,33 @@
 
 	echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >> /etc/rc.local
 	echo "echo never > /sys/kernel/mm/transparent_hugepage/defrag" >> /etc/rc.local
+	
+```
+[root@rac1 tmp]# cd /etc/default/  
+[root@rac1 default]# ll  
+total 12  
+-rw-r--r--. 1 root root  218 Jun  2 14:04 grub  
+-rw-r--r--. 1 root root 1756 Aug 14  2015 nss  
+-rw-r--r--. 1 root root  119 Nov 25  2014 useradd  
+[root@rac1 default]# cp grub grub.bak ------->>>>备份grub文件  
+修改/etc/default/grub文件,如下是修改之后的效果：  
+[root@rac1 default]# cat /etc/default/grub  
+GRUB_TIMEOUT=5  
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"  
+GRUB_DEFAULT=saved  
+GRUB_DISABLE_SUBMENU=true  
+GRUB_TERMINAL_OUTPUT="console"  
+GRUB_CMDLINE_LINUX="rhgb quiet transparent_hugepage=never" ---->>> transparent_hugepage=never是新加的  
+GRUB_DISABLE_RECOVERY="true"  
+[root@rac1 default]# grub2-mkconfig -o /boot/grub2/grub.cfg ---->>执行该命令  
+Generating grub configuration file ...  
+Found linux image: /boot/vmlinuz-3.10.0-327.el7.x86_64  
+Found initrd image: /boot/initramfs-3.10.0-327.el7.x86_64.img  
+Found linux image: /boot/vmlinuz-0-rescue-3b932bfbe4f94ccf93c11ba19641e845  
+Found initrd image: /boot/initramfs-0-rescue-3b932bfbe4f94ccf93c11ba19641e845.img  
+done  
+[root@rac1 default]#reboot
+```
 
 ### 4.6 配置vm.swappiness
 
