@@ -65,6 +65,10 @@
 
 	yum install http://ehdp-cm/install/jdk.rpm
 
+修正jdk安全选项。
+在jre/lib/security中
+crypto.policy=unlimited
+
 配置JDK，在/etc/profile,末尾追加
 
 	export JAVA_HOME=/usr/java/default
