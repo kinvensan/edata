@@ -26,6 +26,7 @@
         <mysql.version>5.1.43</mysql.version>
         <dexecutor.version>2.0.2</dexecutor.version>
         <quartz.version>2.3.0</quartz.version>
+        <spring-cloud-dataflow.version>1.4.0.RELEASE</spring-cloud-dataflow.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +63,11 @@
                 <groupId>com.github.dexecutor</groupId>
                 <artifactId>dexecutor-core</artifactId>
                 <version>${dexecutor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dataflow-rest-client</artifactId>
+                <version>${spring-cloud-dataflow.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
