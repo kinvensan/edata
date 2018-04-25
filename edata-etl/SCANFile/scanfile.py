@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import nsq
+import time
 
 def handler(message):
+    time.sleep(10)
     print message
     return True
 

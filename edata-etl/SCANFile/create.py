@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import nsq
 import tornado.ioloop
 import time
