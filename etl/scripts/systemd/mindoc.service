@@ -1,0 +1,16 @@
+[Unit]
+Description=Mindoc daemon
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/mindoc
+User=root
+Group=root
+Type=simple
+ExecStart=/opt/mindoc/mindoc_linux_amd64 > /opt/mindoc/logs/mindoc_server.log
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -11,4 +11,9 @@ public class WhereFilter {
     private String name;
     private String expression;
     private String AndOrType;
+
+    public String toSql() {
+        StringBuffer sb = new StringBuffer();
+        return sb.toString();
+    }
 }

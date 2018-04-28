@@ -17,7 +17,9 @@ public class Where {
     public String toSql(){
         StringBuffer sb = new StringBuffer();
 
-
+        for(int i = 0; i < filters.size(); i++){
+            
+        }
 
         return sb.toString();
     }
