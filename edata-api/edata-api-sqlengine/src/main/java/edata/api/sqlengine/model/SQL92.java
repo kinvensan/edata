@@ -23,5 +23,6 @@ public class SQL92 {
     public final static String EMPTY = "";
     public final static String AND = "and";
     public final static String OR = "or";
+    public final static String DOT = ".";
 
 }

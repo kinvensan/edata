@@ -2,6 +2,7 @@ package edata.api.sqlengine.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @Data
 public class Query {
-    private List<Column> columns;
-    private List<Table> tables;
-    private List<Filter> filters;
+    private List<Column> columns = new ArrayList<>();
+    private List<Table> tables = new ArrayList<>();
+    private List<Filter> filters = new ArrayList<>();
 }

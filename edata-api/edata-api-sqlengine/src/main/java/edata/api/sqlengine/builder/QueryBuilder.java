@@ -27,6 +27,12 @@ public class QueryBuilder {
     }
 
     public Query build(){
-        return new Query();
+        //如果没有Column，则抛出异常
+        //如果没有Table，则构建一个Table
+
+        //重新构建每一个Column
+        //重新构建每一个Table
+        //重新构建每一个Filter
+        return this.query;
     }
 }

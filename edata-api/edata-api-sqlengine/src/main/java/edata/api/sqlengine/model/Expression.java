@@ -2,6 +2,7 @@ package edata.api.sqlengine.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 @Data
 public class Expression {
-    private Map<String,Object> attr;
-    private String body;
-    private List<Object> params;
+    private String func = "";
+    private String body = "";
+    private List<Object> params = new ArrayList<>();
 }

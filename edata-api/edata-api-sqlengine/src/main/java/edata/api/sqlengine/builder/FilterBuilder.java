@@ -1,7 +1,6 @@
 package edata.api.sqlengine.builder;
 
 import edata.api.sqlengine.model.Filter;
-import edata.api.sqlengine.query.WhereColumn;
 
 /**
  * FilterBuilder
@@ -28,8 +27,8 @@ public class FilterBuilder {
      * 处理表达式
      * @return
      */
-    public FilterBuilder build() {
+    public Filter build() {
 
-        return this;
+        return this.filter;
     }
 }

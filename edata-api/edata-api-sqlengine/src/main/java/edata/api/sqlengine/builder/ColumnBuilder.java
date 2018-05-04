@@ -25,17 +25,19 @@ public class ColumnBuilder {
         return this;
     }
 
-    public ColumnBuilder build(){
+    public Column build(){
         //如果asName为空 ，则处理为Name
-        if(column.getAsName() == null){
+        if(null == column.getAsName()){
             column.setAsName(column.getName());
         }
-        //todo 获取Expression类型，并确定处理类
-        //添加expression的Contents的内容，并设置为是否聚合
         if(null == column.getExpr()){
-
+            column.setExpr(ExpressionBuilder.builder()
+                    .expr(column.getExpr())
+                    .columnName(column.getName())
+                    .tableName(column.getTable())
+                    .build());
         }
-        return this;
+        return this.column;
     }
 
 
