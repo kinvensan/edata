@@ -28,24 +28,23 @@ public class TableBuilder {
         return this;
     }
 
-    public Table build(){
-        //如果Query中没有Table，则使用Column和filter获取一套。
-        if(query.getTables().isEmpty()){
-            Set<String> tables = query.getColumns().stream().map(column -> {
-                return column.getTable();
-            }).collect(Collectors.toSet());
-            Set<String> tables2 = query.getFilters().stream().map(filter -> {
-                return filter.getTable();
-            }).collect(Collectors.toSet());
-            tables.addAll(tables2);
-            tables2.forEach(name ->{
-                table.setName(name);
-                table.setRelation(TableRelation.INNERJOIN.ordinal());
-                query.getTables().add(table);
-            });
+    public TableBuilder table(Table table){
+        this.table = table;
+        return this;
+    }
 
-        }
-        //否则，直接建立表达
+    public TableBuilder name(String name){
+        this.table = new Table(name);
+        return this;
+    }
+
+    public TableBuilder firstTable(Table table){
+        this.table = table;
+        table.setRelation(0);
+        return this;
+    }
+
+    public Table build(){
         return this.table;
     }
 

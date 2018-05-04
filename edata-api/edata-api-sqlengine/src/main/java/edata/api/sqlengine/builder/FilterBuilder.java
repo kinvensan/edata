@@ -23,6 +23,12 @@ public class FilterBuilder {
         return this;
     }
 
+    public FilterBuilder firstFilter(Filter filter) {
+        filter.setRelation(0);
+        this.filter = filter;
+        return this;
+    }
+
     /**
      * 处理表达式
      * @return

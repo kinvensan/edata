@@ -36,7 +36,7 @@ public class ExpressionBuilder {
     }
 
     public Expression build(){
-        if(expression.getFunc().isEmpty()){
+        if(null == expression.getFunc() || expression.getFunc().isEmpty()){
             this.expression.setBody(this.tableName+SQL92.DOT+this.columnName);
         }
         return this.expression;

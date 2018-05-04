@@ -20,7 +20,8 @@ public class GroupbyClause {
     private List<Column> columns = new ArrayList<>();
 
     public GroupbyClause from(Query query){
-        Boolean hasGroupby = query.getColumns().stream().anyMatch(column -> 1==column.getAggregate());
+        Boolean hasGroupby = query.getColumns().size() > 1;
+        hasGroupby = hasGroupby && query.getColumns().stream().anyMatch(column -> 1==column.getAggregate());
         if(hasGroupby){
             this.columns = query.getColumns().stream().filter(column -> 1 == column.getAggregate()).collect(Collectors.toList());
         }
