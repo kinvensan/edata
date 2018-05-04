@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * Query
+ * QueryManager
  *
  * @author kinven
  * @version 0.1

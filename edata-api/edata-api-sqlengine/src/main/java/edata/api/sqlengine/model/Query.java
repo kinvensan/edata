@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * Query 用于解析Json中的一个查询对象
+ * QueryManager 用于解析Json中的一个查询对象
  * <pre>
  *     {query:{
  *         cloumns:[...],
