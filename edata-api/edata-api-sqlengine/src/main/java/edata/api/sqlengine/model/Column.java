@@ -2,6 +2,9 @@ package edata.api.sqlengine.model;
 
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * Column 用于解析Columns中的字段内容
@@ -26,7 +29,7 @@ import lombok.NonNull;
  * @date 2018/4/30
  */
 @Data
-public class Column {
+public class Column implements Serializable{
     @NonNull
     private String name;//字段名称，如果表达式存在。
     @NonNull
@@ -34,9 +37,13 @@ public class Column {
     private String typename;//字段的类型
     private String uiname; //字段显示的名称
     private String asName; //字段输出名称
-    private short aggregate = 0; //0，不是聚合字段, 1是聚合字段
-    private short orderby = 0;//0 不排序，1 升序 aesc 2 降序desc
-    private short hidden = 0; //0,不显示，1 显示，用于作为排序字段的使用。
+    private int aggregate = 0; //0，不是聚合字段, 1是聚合字段
+    private int orderby = 0;//0 不排序，1 升序 aesc 2 降序desc
+    private int hidden = 0; //0,不显示，1 显示，用于作为排序字段的使用。
 
     private Expression expr; //Sql表达式
+
+    public Column(){
+        super();
+    }
 }

@@ -1,6 +1,8 @@
 package edata.api.sqlengine.model;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,10 @@ import java.util.Map;
  * @date 2018/4/30
  */
 @Data
+@RequiredArgsConstructor
 public class Expression {
-    private String func = "";
+    @NonNull
+    private String func = "NONE";
     private String body = "";
     private List<Object> params = new ArrayList<>();
 }

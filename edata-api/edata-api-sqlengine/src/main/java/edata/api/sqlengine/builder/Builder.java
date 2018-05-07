@@ -9,5 +9,7 @@ package edata.api.sqlengine.builder;
  */
 public interface Builder<T> {
 
+    public <E extends Builder<T>> E from(T t);
+    public <E extends Builder<T>> E newOne();
     public T build();
 }

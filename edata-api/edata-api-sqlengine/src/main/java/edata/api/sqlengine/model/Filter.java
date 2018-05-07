@@ -4,6 +4,7 @@ import edata.api.sqlengine.type.FilterRelation;
 import edata.api.sqlengine.type.TableRelation;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Filter 用于解析Json中的过滤部分
@@ -25,6 +26,7 @@ import lombok.NonNull;
  * @date 2018/4/30
  */
 @Data
+@RequiredArgsConstructor
 public class Filter {
     @NonNull
     private String name;  //字段的名称
