@@ -21,11 +21,6 @@ public class ColumnBuilder implements Builder<Column> {
         return selectColumnBuilder;
     }
 
-    public ColumnBuilder column(Column column){
-        this.column = column;
-        return this;
-    }
-
     @Override
     public ColumnBuilder from(Column column) {
         this.column = column;
@@ -73,6 +68,13 @@ public class ColumnBuilder implements Builder<Column> {
         return this;
     }
 
+    public ColumnBuilder func(String func){
+        if(null == this.column.getExpr()){
+            this.column.setExpr(new Expression());
+        }
+        this.column.getExpr().setFunc(func);
+        return this;
+    }
 
     public Column build(){
         //如果asName为空 ，则处理为Name
@@ -81,12 +83,10 @@ public class ColumnBuilder implements Builder<Column> {
         }
         //表达式处理
         if(null == column.getExpr()){
-            column.setExpr(ExpressionBuilder.builder()
-                    .expr(column.getExpr())
-                    .columnName(column.getName())
-                    .tableName(column.getTable())
-                    .build());
+            func("${column.fullName}");
         }
+        //构建内部表达式的body
+        ExpressionBuilder.builder().from(this.column.getExpr()).params(this.column).build();
         return this.column;
     }
 

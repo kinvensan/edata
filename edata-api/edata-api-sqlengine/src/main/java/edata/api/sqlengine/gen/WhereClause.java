@@ -30,7 +30,7 @@ public class WhereClause {
             return SQL92.EMPTY;
         }
 
-        StringJoiner spaceJoiner = new StringJoiner(SQL92.SPACE,SQL92.WHERE+SQL92.SPACE,SQL92.SPACE);
+        StringJoiner spaceJoiner = new StringJoiner(SQL92.SPACE,SQL92.WHERE,SQL92.SPACE);
         this.filters.stream().forEach(filter -> {
             spaceJoiner.add(FilterRelation.getString(filter.getRelation())).add(filter.getExpr().getBody());
 

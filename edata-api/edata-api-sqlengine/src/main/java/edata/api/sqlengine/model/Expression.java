@@ -2,24 +2,27 @@ package edata.api.sqlengine.model;
 
 import lombok.Data;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Expr
+ * Expr 表达是解析，使用
  *
  * @author kinven
  * @version 0.1
  * @date 2018/4/30
  */
 @Data
-@RequiredArgsConstructor
 public class Expression {
     @NonNull
-    private String func = "NONE";
-    private String body = "";
-    private List<Object> params = new ArrayList<>();
+    private String func;
+    private String body;
+    private Map<String,Object> params ;
+
+    public Expression(){
+        this.func = "";
+        this.body = "";
+        this.params = new HashMap<>();
+    }
 }

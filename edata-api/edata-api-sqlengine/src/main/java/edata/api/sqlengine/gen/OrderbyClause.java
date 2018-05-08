@@ -21,7 +21,7 @@ public class OrderbyClause {
     private List<Column> columns = new ArrayList<>();
 
     public OrderbyClause from(Query query){
-        this.columns = query.getColumns().stream().filter(column -> 0==column.getOrderby()).collect(Collectors.toList());
+        this.columns = query.getColumns().stream().filter(column -> !(0==column.getOrderby())).collect(Collectors.toList());
         return this;
     }
 

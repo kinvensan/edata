@@ -27,7 +27,8 @@ public class SelectClause {
     }
 
     public SelectClause from(Query query){
-        this.columns = query.getColumns().stream().filter(column -> !(0==column.getHidden())).collect(Collectors.toList());;
+        columns.addAll(query.getColumns());
+        columns = columns.stream().filter(column -> 0==column.getHidden()).collect(Collectors.toList());
         return this;
     }
 

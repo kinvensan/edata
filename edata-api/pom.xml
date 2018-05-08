@@ -11,6 +11,7 @@
     <modules>
         <module>edata-api-dependencies</module>
         <module>edata-api-sqlengine</module>
+        <module>edata-api-meta</module>
     </modules>
 
     <properties>

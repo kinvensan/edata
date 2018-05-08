@@ -1,18 +1,13 @@
 package edata.api.sqlengine.builder;
 
-import edata.api.sqlengine.QuerySqlEngine;
 import edata.api.sqlengine.meta.DefaultEntityManager;
-import edata.api.sqlengine.meta.EntityManager;
 import edata.api.sqlengine.model.Expression;
 import edata.api.sqlengine.model.Query;
 import edata.api.sqlengine.model.SQL92;
 import edata.api.sqlengine.model.Table;
-import edata.api.sqlengine.type.TableRelation;
 
 import java.util.List;
-import java.util.Set;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 /**
  * TableBuilder
@@ -57,8 +52,9 @@ public class TableBuilder implements Builder<Table> {
     }
 
     @Override
-    public TableBuilder newOne(Object... args) {
-        this.table = new Table(String.valueOf(args[0]));
+    public TableBuilder newOne() {
+        this.table = new Table();
+        this.table.setRelation(1);
         return this;
     }
 
@@ -78,6 +74,14 @@ public class TableBuilder implements Builder<Table> {
         return this;
     }
 
+    public TableBuilder func(String func){
+        if(null == this.table.getExpr()){
+            this.table.setExpr(new Expression());
+        }
+        this.table.getExpr().setFunc(func);
+        return this;
+    }
+
     public Table build(){
         if(null == this.table.getName()){
             /*
@@ -89,8 +93,11 @@ public class TableBuilder implements Builder<Table> {
             // 跑个腿，与实体关联，实现join using表达式
             List<String> params = DefaultEntityManager.getInstance().getJoinUsing(this.table.getName());
             StringJoiner usingJoiner = SQL92.USING();
-            ExpressionBuilder.builder().func("NONE").body(usingJoiner.add())
+            //ExpressionBuilder.builder().func("NONE").body(usingJoiner.add())
         }
+
+        //构建表达式body
+        ExpressionBuilder.builder().from(this.table.getExpr()).params(this.table).build();
 
         return this.table;
     }

@@ -1,10 +1,7 @@
 package edata.api.sqlengine.model;
 
-import edata.api.sqlengine.type.FilterRelation;
-import edata.api.sqlengine.type.TableRelation;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Filter 用于解析Json中的过滤部分
@@ -26,7 +23,6 @@ import lombok.RequiredArgsConstructor;
  * @date 2018/4/30
  */
 @Data
-@RequiredArgsConstructor
 public class Filter {
     @NonNull
     private String name;  //字段的名称
@@ -34,4 +30,12 @@ public class Filter {
     private String table; //字段对应的表格
     private int relation = 0; //前置关系 0 为空，1 and，2 or
     private Expression expr;
+
+    public Filter(){
+
+    }
+
+    public String getFullName(){
+        return this.table + SQL92.DOT + this.name;
+    }
 }

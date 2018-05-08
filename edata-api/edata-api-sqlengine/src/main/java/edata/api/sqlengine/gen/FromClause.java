@@ -29,7 +29,7 @@ public class FromClause {
         if(tables.size() == 0){
             throw new SqlException();
         }
-        StringJoiner spaceJoiner = new StringJoiner(SQL92.SPACE,SQL92.FROM+SQL92.SPACE,SQL92.SPACE);
+        StringJoiner spaceJoiner = new StringJoiner(SQL92.SPACE,SQL92.FROM,SQL92.SPACE);
         this.tables.stream().forEach(table -> {
             spaceJoiner.add(TableRelation.getString(table.getRelation())).add(table.getName());
             if(table.getRelation() > 0) {

@@ -4,7 +4,6 @@ import org.beetl.sql.core.kit.CaseInsensitiveHashMap;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * DefaultEntityManager
@@ -28,12 +27,9 @@ public class DefaultEntityManager implements EntityManager{
         return entityTableMap.get(tableName);
     }
 
-    public void registry(){
-
-    }
 
     @Override
-    public void regist() {
+    public void regist(Class<?> entity) {
 
     }
 

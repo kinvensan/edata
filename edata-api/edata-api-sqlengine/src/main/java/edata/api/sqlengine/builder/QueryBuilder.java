@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @version 0.1
  * @date 2018/5/3
  */
-public class QueryBuilder {
+public class QueryBuilder implements Builder<Query> {
 
     private Query query;
 
@@ -27,25 +27,68 @@ public class QueryBuilder {
         return new QueryBuilder();
     }
 
-    public QueryBuilder query(Query query){
+    @Override
+    public QueryBuilder from(Query query) {
         this.query = query;
         return this;
     }
 
-    /**
-     * 获取Query对象
-     * @return
-     */
-    public Query getQuery(){
-        return query;
+    @Override
+    public QueryBuilder newOne() {
+        this.query = new Query();
+        this.query.setColumns(new ArrayList<>());
+        this.query.setTables(new ArrayList<>());
+        this.query.setFilters(new ArrayList<>());
+        return this;
+    }
+
+    public QueryBuilder columns(List<Column> columns){
+        this.query.setColumns(columns);
+        return this;
+    }
+
+    public QueryBuilder addColumn(Column column) {
+        if(null == this.query.getColumns()){
+            this.query.setColumns(new ArrayList<>());
+        }
+        this.query.getColumns().add(column);
+        return this;
+    }
+
+
+    public QueryBuilder tables(List<Table> tables){
+        this.query.setTables(tables);
+        return this;
+    }
+
+    public QueryBuilder addTable(Table table) {
+        if(null == this.query.getTables() || this.query.getTables().isEmpty()){
+            this.query.setTables(new ArrayList<>());
+        }
+        this.query.getTables().add(table);
+        return this;
+    }
+
+
+    public QueryBuilder filters(List<Filter> filters) {
+        this.query.setFilters(filters);
+        return this;
+    }
+
+    public QueryBuilder addFilter(Filter filter) {
+        if(null == this.query.getFilters() || this.query.getFilters().isEmpty()) {
+            this.query.setFilters(new ArrayList<>());
+        }
+        this.query.getFilters().add(filter);
+        return this;
     }
 
     public Query build(){
         //如果没有Column，则抛出异常
 
         buildTables();
+        buildColumns();
         buildFilters();
-
 
 
         //重新构建每一个Column
@@ -59,7 +102,7 @@ public class QueryBuilder {
             throw new SqlException();
         }
         query.getColumns().forEach(column -> {
-            ColumnBuilder.builder().column(column).build();
+            ColumnBuilder.builder().from(column).build();
         });
     }
 
@@ -71,7 +114,7 @@ public class QueryBuilder {
             FilterBuilder.builder().filter(filter).build();
         });
         if(query.getFilters().size() >= 1){
-            FilterBuilder.builder().firstFilter(query.getFilters().get(0)).build();
+            query.getFilters().get(0).setRelation(0);
         }
     }
 
@@ -83,15 +126,15 @@ public class QueryBuilder {
             Set<String> tableNames = getTablesFromColumn(query.getColumns());
             tableNames.addAll(getTablesFromFilter(query.getFilters()));
             List<Table> tables = tableNames.stream().map(name -> {
-                return TableBuilder.builder().name(name).build();
+                return TableBuilder.builder().newOne().name(name).build();
             }).collect(Collectors.toList());
             query.setTables(tables);
         }
         query.getTables().forEach(table -> {
-            TableBuilder.builder().table(table).build();
+            TableBuilder.builder().from(table).build();
         });
         //把第一个表的关系删除
-        TableBuilder.builder().firstTable(query.getTables().get(0)).build();
+        query.getTables().get(0).setRelation(0);
     }
 
     private Set<String> getTablesFromColumn(List<Column> columns){

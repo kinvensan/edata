@@ -2,7 +2,6 @@ package edata.api.sqlengine.model;
 
 import lombok.Data;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 
@@ -16,8 +15,8 @@ import java.io.Serializable;
  *         uiname:"字段1"
  *         expr:{
  *          body:"",
- *          attr:{},
- *          params:[]
+ *          func:"",
+ *          params:{}
  *         },
  *         aggregate:0 //0 维度 ，1 聚合
  *         orderby:0
@@ -35,7 +34,7 @@ public class Column implements Serializable{
     @NonNull
     private String table; //字段所在的表
     private String typename;//字段的类型
-    private String uiname; //字段显示的名称
+    private String uiName; //字段显示的名称
     private String asName; //字段输出名称
     private int aggregate = 0; //0，不是聚合字段, 1是聚合字段
     private int orderby = 0;//0 不排序，1 升序 aesc 2 降序desc
@@ -45,5 +44,9 @@ public class Column implements Serializable{
 
     public Column(){
         super();
+    }
+
+    public String getFullName(){
+        return this.table + SQL92.DOT + this.name;
     }
 }
