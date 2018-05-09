@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class DefaultEntityManager implements EntityManager{
     private static EntityManager instance = null;
-    private static final Map<String,EntityTable> entityTableMap = new CaseInsensitiveHashMap();
+    private static final Map<String,EntityTableInfo> entityTableMap = new CaseInsensitiveHashMap();
 
     public static EntityManager getInstance(){
         if(instance == null) {
@@ -23,7 +23,7 @@ public class DefaultEntityManager implements EntityManager{
         return instance;
     }
 
-    public EntityTable get(String tableName){
+    public EntityTableInfo get(String tableName){
         return entityTableMap.get(tableName);
     }
 
@@ -34,7 +34,7 @@ public class DefaultEntityManager implements EntityManager{
     }
 
     @Override
-    public EntityTable getEntityTable(String tableName) {
+    public EntityTableInfo getEntityTable(String tableName) {
         return null;
     }
 

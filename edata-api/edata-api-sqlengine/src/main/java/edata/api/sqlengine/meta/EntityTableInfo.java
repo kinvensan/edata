@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * EntityTable
+ * EntityTableInfo
  *
  * @author kinven
  * @version 0.1
  * @date 2018/5/6
  */
-public class EntityTable {
+public class EntityTableInfo {
 
     // 实体映射的数据库表名
     private String table;
@@ -34,7 +34,7 @@ public class EntityTable {
     // join使用的keys
     private Map<String, String> joinColumnMap = new CaseInsensitiveHashMap();
 
-    public EntityTable(Class<?> clazz){
+    public EntityTableInfo(Class<?> clazz){
 
     }
     private synchronized void initEntityNameMap(Class<?> entityClass){

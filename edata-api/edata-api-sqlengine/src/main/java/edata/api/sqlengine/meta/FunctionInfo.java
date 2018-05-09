@@ -28,13 +28,13 @@ public class FunctionInfo {
     public void register(Class<?> clazz){
         if(isFunction(clazz)){
             TemplateFunction templateFunction = clazz.getAnnotation(TemplateFunction.class);
-            //this.name = templateFunctionn
+            this.name = templateFunction.name();
             this.clazz = (Class<Function>)clazz;
         }
     }
 
-    public void setName(){
-
+    public void setName(String name){
+        this.name = name;
     }
 
     public String getName() {

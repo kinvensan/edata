@@ -6,13 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * TemplateFunctionConfig
+ * Comment
  *
  * @author kinven
  * @version 0.1
- * @date 2018/5/9
- */
+ * @date 18-5-9
+ **/
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value={ElementType.METHOD,ElementType.FIELD})
-public @interface TemplateFunctionConfig {
+@Target(value={ElementType.TYPE,ElementType.METHOD,ElementType.FIELD})
+public @interface Comment {
+    public String value();
 }

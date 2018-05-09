@@ -1,8 +1,6 @@
 package edata.api.sqlengine.meta;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * EntityManager
@@ -14,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public interface EntityManager {
 
     public void regist(Class<?> entity);
-    public EntityTable getEntityTable(String tableName);
+    public EntityTableInfo getEntityTable(String tableName);
     public String getColumnName(String tableName,String colName);
     public String getColumnType(String tableName,String colName);
     public List<String> getJoinUsing(String tableName);
