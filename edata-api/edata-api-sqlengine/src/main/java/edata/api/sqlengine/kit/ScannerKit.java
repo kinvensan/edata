@@ -1,4 +1,4 @@
-package edata.api.sqlengine.meta;
+package edata.api.sqlengine.kit;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -13,15 +13,13 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * FunctionScanner 扫描目录下的Function文件
+ * ScannerKit
  *
  * @author kinven
  * @version 0.1
- * @date 18-5-8
- **/
-public class FunctionScanner {
-
-
+ * @date 2018/5/9
+ */
+public class ScannerKit {
 
     /**
      * 从包package中获取所有的Class
