@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * FunctionInfo
+ * FunctionInfo 获取函数登记表
  *
  * @author kinven
  * @version 0.1
