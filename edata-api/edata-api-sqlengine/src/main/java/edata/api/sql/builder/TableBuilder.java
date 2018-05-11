@@ -1,5 +1,6 @@
 package edata.api.sql.builder;
 
+import edata.api.sql.Engine;
 import edata.api.sql.EngineException;
 import edata.api.sql.kit.ScannerKit;
 import edata.api.sql.model.Expression;
@@ -91,10 +92,10 @@ public class TableBuilder implements Builder<Table> {
             throw EngineException.newBuilderException("TableBuilder check error, this is no table selected." );
         }
 
-        if(ScannerKit.hasTable(table.getName()) && null == this.table.getExpr()){
+        if(Engine.getInstance().hasTable(table.getName()) && this.table.getExpr().getFunc().isEmpty()){
             // 跑个腿，与实体关联，实现join using表达式
             StringJoiner usingJoiner = SQL99.USINGJOINER();
-            ScannerKit.getEntityTableInfo(this.table.getName()).getJoinColumns().stream().forEach(joinColumn -> {
+            Engine.getInstance().getEntityTableInfo(this.table.getName()).getJoinColumns().stream().forEach(joinColumn -> {
                 usingJoiner.add(joinColumn);
             });
             this.func(usingJoiner.toString());

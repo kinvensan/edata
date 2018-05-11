@@ -7,6 +7,7 @@ import edata.api.sql.model.Query;
 import edata.api.sql.model.Table;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -85,7 +86,7 @@ public class QueryBuilder implements Builder<Query> {
 
     public Query build(){
         //如果没有Column，则抛出异常
-
+        sortColumns();
         buildTables();
         buildColumns();
         buildFilters();
@@ -95,6 +96,13 @@ public class QueryBuilder implements Builder<Query> {
         //重新构建每一个Table
         //重新构建每一个Filter
         return this.query;
+    }
+
+    private void sortColumns(){
+        Comparator<Column> byAggreagateASC = Comparator.comparing(Column::getAggregate);
+        Comparator<Column> byhidden = Comparator.comparing(Column::getHidden);
+        Comparator<Column> compose = byAggreagateASC.thenComparing(byhidden);
+        query.setColumns(query.getColumns().stream().sorted(compose).collect(Collectors.toList()));
     }
 
     private void buildColumns(){

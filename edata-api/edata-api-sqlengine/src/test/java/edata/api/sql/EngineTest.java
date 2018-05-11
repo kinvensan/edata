@@ -54,4 +54,16 @@ public class EngineTest {
         assertEquals("select t.a as a,sum(t.b) as b from t where t.a=1 group by t.a",Engine.getInstance().parse(query3).getTemplate());
     }
 
+    @Test
+    public void testJoinSqlSource(){
+        Query query4 = QueryBuilder.builder().newOne().addColumn(
+                ColumnBuilder.builder().newOne().name("sex").table("t_sex").orderby(2).build()
+        ).addColumn(
+                ColumnBuilder.builder().newOne().name("salary").table("t_salary").aggregate(1).func("sum(${column.fullName})").build()
+        ).addFilter(
+                FilterBuilder.builder().newOne().name("dept").table("t_salary").func("${filter.fullName}=#dept#").addParam("dept","it").build()
+        ).build();
+        assertEquals("select t_sex.sex as sex,sum(t_salary.salary) as salary from t_sex inner join t_salary using(name) where t_salary.dept=#dept# group by t_sex.sex order by sex desc",Engine.getInstance().parse(query4).getTemplate());
+    }
+
 }

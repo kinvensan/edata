@@ -47,7 +47,7 @@ public class Engine {
     public void configurate(Config config){
         this.config = config;
         scanFunction(config.getFunctionPackage());
-        ScannerKit.scanEntityTable(config.getEntityPackage());
+        scanEntityTable(config.getEntityPackage());
     }
 
     public SqlSource parse(Query query){
@@ -56,6 +56,22 @@ public class Engine {
 
     public Config getConfig() {
         return config;
+    }
+
+    public boolean hasFunction(String name){
+        return FUNCTION_INFO_MAP.containsKey(name);
+    }
+
+    public FunctionInfo getFunctionInfo(String name){
+        return FUNCTION_INFO_MAP.get(name);
+    }
+
+    public boolean hasTable(String name){
+        return  ENTITY_TABLE_INFO_MAP.containsKey(name);
+    }
+
+    public EntityTableInfo getEntityTableInfo(String name){
+        return  ENTITY_TABLE_INFO_MAP.get(name);
     }
 
     private void scanFunction(String basePackage){

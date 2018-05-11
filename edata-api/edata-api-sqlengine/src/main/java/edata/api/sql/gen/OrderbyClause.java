@@ -3,6 +3,7 @@ package edata.api.sql.gen;
 import edata.api.sql.model.Column;
 import edata.api.sql.model.Query;
 import edata.api.sql.model.SQL99;
+import edata.api.sql.type.OrderbyType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,9 @@ public class OrderbyClause {
         }
         StringJoiner orderbyJoiner = SQL99.ORDERBYJOINER();
         columns.forEach(column -> {
-            orderbyJoiner.add(column.getAsName());
+            StringJoiner spaceJoiner = SQL99.SPACEJOINER();
+            spaceJoiner.add(column.getAsName()).add(OrderbyType.getString(column.getOrderby()));
+            orderbyJoiner.add(spaceJoiner.toString());
         });
         return orderbyJoiner.toString().trim();
     }

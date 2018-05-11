@@ -37,7 +37,7 @@ public class FromClause {
         this.tables.stream().forEach(table -> {
             fromJoiner.add(TableRelation.getString(table.getRelation())).add(table.getName());
             if(table.getRelation() > 0) {
-                fromJoiner.add(SQL99.ON).add(table.getExpr().getBody());
+                fromJoiner.add(table.getExpr().getBody());
             }
         });
         return fromJoiner.toString().trim();

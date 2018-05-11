@@ -26,9 +26,11 @@ public class SQL99 {
     public final static String AND = "and";
     public final static String OR = "or";
     public final static String DOT = ".";
-    public final static String USING = "USING";
+    public final static String USING = "using";
     public final static String BRACKETLEFT = "(";
     public final static String BRACKETRIGHT = ")";
+    public final static String ASC = "asc";
+    public final static String DESC = "desc";
 
 
 

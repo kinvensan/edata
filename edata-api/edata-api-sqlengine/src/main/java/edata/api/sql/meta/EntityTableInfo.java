@@ -56,7 +56,7 @@ public class EntityTableInfo {
                 if(null != entityColumnInfo.getColumnName()) {
                     colsIndex.put(entityColumnInfo.getColumnName(), entityColumnInfo);
                 }
-                if(null != entityColumnInfo) {
+                if(null != entityColumnInfo.getJoinColumn()) {
                     joinColumnIndex.add(entityColumnInfo.getJoinColumn());
                 }
 

@@ -70,6 +70,14 @@ public class FilterBuilder implements Builder<Filter>{
         return this;
     }
 
+    public FilterBuilder addParam(String key,Object value){
+        if(null == this.filter.getExpr()) {
+            this.filter.setExpr(new Expression());
+        }
+        this.filter.getExpr().getParams().put(key,value);
+        return this;
+    }
+
 
 
     /**
