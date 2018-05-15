@@ -1,0 +1,290 @@
+CREATE TABLE t_users_total_2013 (
+  uid bigint,
+  userid bigint,
+  gpid int ,
+  appPlatform string ,
+  userName string ,
+  userMac string ,
+  userPwd string ,
+  email string  ,
+  address string  ,
+  idCard string ,
+  telephone string ,
+  msnqq string ,
+  registerTime string ,
+  registerIp string ,
+  lastLoginIp string ,
+  lastLoginTime string ,
+  loginIp string ,
+  loginTime string ,
+  modifiedTime string ,
+  flag string ,
+  gameCode string ,
+  thirdPlate string ,
+  platForm string ,
+  advertiser string  ,
+  area string  
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_users_total_2013.sql' INTO TABLE t_users_total_2013;
+
+
+CREATE TABLE t_users_total_2014 (
+  uid bigint,
+  userid bigint ,
+  gpid int ,
+  appPlatform string ,
+  userName string ,
+  userMac string ,
+  userPwd string ,
+  email string  ,
+  address string  ,
+  idCard string  ,
+  telephone string ,
+  msnqq string ,
+  registerTime string ,
+  registerIp string ,
+  lastLoginIp string ,
+  lastLoginTime string ,
+  loginIp string ,
+  loginTime string ,
+  modifiedTime string ,
+  flag string ,
+  gameCode string ,
+  thirdPlate string ,
+  platForm string ,
+  advertiser string  ,
+  area string  
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_users_total_2014.sql' INTO TABLE t_users_total_2014;
+
+
+
+
+CREATE TABLE t_users_total_2015 (
+  uid bigint,
+  userid bigint ,
+  gpid int ,
+  appPlatform string ,
+  userName string ,
+  userMac string ,
+  userPwd string ,
+  email string  ,
+  address string  ,
+  idCard string ,
+  telephone string ,
+  msnqq string ,
+  registerTime string ,
+  registerIp string ,
+  lastLoginIp string ,
+  lastLoginTime string ,
+  loginIp string ,
+  loginTime string ,
+  modifiedTime string ,
+  flag string ,
+  gameCode string ,
+  thirdPlate string ,
+  platForm string ,
+  advertiser string  ,
+  area string  
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_users_total_2015.sql' INTO TABLE t_users_total_2015;
+
+CREATE TABLE t_users_total (
+  uid bigint,
+  userid bigint ,
+  gpid int ,
+  appPlatform string ,
+  userName string ,
+  userMac string ,
+  userPwd string ,
+  email string  ,
+  address string  ,
+  idCard string  ,
+  telephone string ,
+  msnqq string ,
+  registerTime string ,
+  registerIp string ,
+  lastLoginIp string ,
+  lastLoginTime string ,
+  loginIp string ,
+  loginTime string ,
+  modifiedTime string ,
+  flag string ,
+  gameCode string ,
+  thirdPlate string ,
+  platForm string ,
+  advertiser string  ,
+  area string 
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_users_total.sql' INTO TABLE t_users_total;
+
+
+
+CREATE TABLE t_game_total_moneys (
+  id bigint  ,
+  uid bigint ,
+  creditId string ,
+  gameCode string,
+  serverCode string ,
+  efunOrderId string,
+  thirdOrderId string,
+  payType string ,
+  currency string ,
+  gamePay float ,
+  stone float ,
+  twCoin float ,
+  usd float ,
+  orderTime string ,
+  flag string,
+  payFrom string,
+  remark string,
+  area string,
+  modifiedTime string ,
+  resend string ,
+  checkoutMonth string,
+  roleLevel string,
+  gamePoint float ,
+  donate float ,
+  reserve1 string,
+  reserve2 string,
+  reserve3 string,
+  reserve4 string
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_game_total_moneys.sql' INTO TABLE t_game_total_moneys;
+
+CREATE TABLE t_game_total_moneys_2013 (
+  id bigint,
+  uid bigint,
+  creditId string ,
+  gameCode string ,
+  serverCode string ,
+  efunOrderId string ,
+  thirdOrderId string ,
+  payType string ,
+  currency string ,
+  gamePay float ,
+  stone float,
+  twCoin float,
+  usd float,
+  orderTime string ,
+  flag string ,
+  payFrom string ,
+  remark string ,
+  area string,
+  modifiedTime string ,
+  resend string ,
+  checkoutMonth string ,
+  roleLevel string ,
+  gamePoint float ,
+  donate float ,
+  reserve1 string ,
+  reserve2 string ,
+  reserve3 string ,
+  reserve4 string 
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_game_total_moneys_2013.sql' INTO TABLE t_game_total_moneys_2013;
+
+CREATE TABLE t_game_total_moneys_2014 (
+  id bigint,
+  uid bigint,
+  creditId string ,
+  gameCode string ,
+  serverCode string ,
+  efunOrderId string ,
+  thirdOrderId string ,
+  payType string ,
+  currency string ,
+  gamePay float ,
+  stone float ,
+  twCoin float ,
+  usd float ,
+  orderTime string ,
+  flag string ,
+  payFrom string ,
+  remark string ,
+  area string ,
+  modifiedTime string ,
+  resend string ,
+  checkoutMonth string ,
+  roleLevel string ,
+  gamePoint float ,
+  donate float ,
+  reserve1 string ,
+  reserve2 string ,
+  reserve3 string ,
+  reserve4 string 
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_game_total_moneys_2014.sql' INTO TABLE t_game_total_moneys_2014;
+
+CREATE TABLE t_game_total_moneys_2015 (
+  id bigint,
+  uid bigint,
+  creditId string ,
+  gameCode string ,
+  serverCode string ,
+  efunOrderId string ,
+  thirdOrderId string ,
+  payType string ,
+  currency string ,
+  gamePay float ,
+  stone float ,
+  twCoin float ,
+  usd float ,
+  orderTime string ,
+  flag string ,
+  payFrom string ,
+  remark string ,
+  area string ,
+  modifiedTime string ,
+  resend string ,
+  checkoutMonth string ,
+  roleLevel string ,
+  gamePoint float ,
+  donate float ,
+  reserve1 string ,
+  reserve2 string ,
+  reserve3 string ,
+  reserve4 string 
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_game_total_moneys_2015.sql' INTO TABLE t_game_total_moneys_2015;
+
+
+CREATE TABLE t_users_total_relation (
+  id bigint  ,
+  userid bigint ,
+  gpid int,
+  appPlatform string ,
+  gameCode string  ,
+  thirdPlate string,
+  plateForm string ,
+  registerIp string,
+  address string ,
+  advertiser string ,
+  mac string ,
+  imei string ,
+  androidid string ,
+  systemVersion string ,
+  deviceType string ,
+  registerTime string ,
+  flag int,
+  area string 
+)  ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/data/hkdata/t_users_total_relation.sql' INTO TABLE t_users_total_relation;
